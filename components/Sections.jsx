@@ -125,16 +125,14 @@ export function Pricing() {
       name: "AI Website Front Desk",
       price: "$500",
       per: "/month",
-      best: <>Add an AI chatbot to your existing website so visitors can ask questions and request appointments or quotes.</>,
+      best: "Best for businesses that want their website to capture more calls, quote requests, and appointments.",
       includes: [
         "AI chatbot added to existing website",
-        "FAQ answering",
+        "Answers common questions",
+        "Collects lead details",
         "Appointment or quote request flow",
-        "Lead info capture",
-        "Email notification to the office",
-        "Basic dashboard",
-        "Weekly report",
-        "No SMS approval required",
+        "Sends request to your office",
+        "Basic monthly report",
         "No website rebuild needed",
       ],
       cta: "Try It Free for 7 Days",
@@ -145,51 +143,43 @@ export function Pricing() {
       name: "Full AI Front Desk",
       price: "$1,000",
       per: "/month",
-      best: <>Everything in Tier 1, plus <b>AI phone backup</b> for missed calls and after-hours calls.</>,
-      callout: "When someone calls your business, your team gets the first chance to answer. If nobody answers after about 15 seconds, the call rolls over to the AI front desk instead of voicemail. The AI collects details and sends the summary to your office.",
+      best: "Best for businesses that want website chat plus missed-call and after-hours backup.",
       includes: [
-        "Everything in AI Website Front Desk",
+        "Everything in Tier 1",
+        "Missed-call AI backup",
+        "After-hours AI answering",
         "Business keeps current phone number",
         "Staff answers first",
-        "If no one answers after 15 seconds, AI answers",
-        "AI answers after-hours calls",
-        "Caller details collected",
-        "Call summaries sent to the office",
-        "Monthly performance report",
-        "SMS follow-up after A2P approval",
-        "Appointment reminders after A2P approval",
+        "If no one answers, AI collects caller details",
+        "Call summaries sent to your office",
+        "Includes up to 100 AI-handled call minutes/month",
       ],
       cta: "Book a Call",
       badge: "Most Popular",
       featured: true,
       ctaPrimary: true,
-      note: "Includes up to 100 AI-handled call minutes per month. Higher call volume may require a custom plan.",
     },
     {
-      name: "Guaranteed Appointment Engine",
-      price: "$2,500",
+      name: "Growth Appointment Engine",
+      priceLead: "Starting at",
+      price: "$1,500",
       per: "/month + ad spend",
-      best: <>For businesses that want us to help <b>generate and deliver qualified booked appointments</b>, not just capture existing website visitors.</>,
-      promise: "Guaranteed 10 qualified booked appointments per month or we work for free until you get them.",
+      best: "For businesses that want new appointment opportunities generated for them, not just better website conversion.",
+      promise: <><b>Launch offer:</b> Get 10 qualified appointment opportunities or we keep working until you do.</>,
       includes: [
-        "Everything in Full AI Front Desk",
-        "Lead generation campaign setup",
+        "Everything in Tier 2",
         "Landing page",
-        "AI chatbot",
-        "Appointment request flow",
-        "Lead source tracking",
+        "Lead generation campaign setup",
+        "Lead tracking",
         "Qualification flow",
-        "Booked appointment delivery",
-        "Appointment quality review",
-        "Bad lead replacement rules",
-        "Monthly performance report",
+        "Appointment request delivery",
+        "Monthly performance review",
       ],
-      cta: "Apply for Guarantee",
-      badge: "Best for Growth",
+      cta: "Apply for Growth Plan",
+      badge: "Done For You Growth",
       featured: false,
       ctaPrimary: false,
-      note: "Ad spend is separate and paid by the business.",
-      disclaimer: "Qualified appointments only. We do not guarantee sales, revenue, or close rate. If an appointment is fake, duplicate, outside your service area, or does not meet the agreed qualification rules, it does not count.",
+      disclaimer: "Qualified opportunities only. We do not guarantee closed deals, revenue, or close rate.",
     },
   ];
 
@@ -217,6 +207,7 @@ export function Pricing() {
               {t.badge && <span className="tier__badge">{t.badge}</span>}
               <div className="tier__name">{t.name}</div>
               <div className="tier__price">
+                {t.priceLead && <span className="per">{t.priceLead}</span>}
                 <span className="num">{t.price}</span>
                 {t.per && <span className="per">{t.per}</span>}
               </div>
@@ -368,9 +359,9 @@ export function Contact() {
               <label style={fieldStyle}>Which tier are you interested in?</label>
               <select style={inputStyle} value={form.tier} onChange={set("tier")} onFocus={onFocus} onBlur={onBlur}>
                 <option value="" style={{ background: "#0f1218" }}>Choose one…</option>
-                <option style={{ background: "#0f1218" }}>AI Website Front Desk – $500/mo</option>
-                <option style={{ background: "#0f1218" }}>Full AI Front Desk – $1,000/mo</option>
-                <option style={{ background: "#0f1218" }}>Guaranteed Appointment Engine – $2,500/mo + ad spend</option>
+                <option style={{ background: "#0f1218" }}>AI Website Front Desk - $500/mo</option>
+                <option style={{ background: "#0f1218" }}>Full AI Front Desk - $1,000/mo</option>
+                <option style={{ background: "#0f1218" }}>Growth Appointment Engine - Starting at $1,500/mo + ad spend</option>
                 <option style={{ background: "#0f1218" }}>Not sure yet</option>
               </select>
             </div>
