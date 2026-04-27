@@ -7,8 +7,7 @@ import { BrandMark } from "./Mascot";
 const NAV_LINKS = [
   { label: "How It Works", href: "/#how-it-works" },
   { label: "Industries", href: "/#industries" },
-  { label: "Territories", href: "/#territories" },
-  { label: "3 Appointment Test", href: "/#three-test" },
+  { label: "Pricing", href: "/#pricing" },
 ];
 
 export function Nav() {
@@ -97,8 +96,8 @@ export function Footer() {
             <div className="footer__col">
               <div className="footer__h">Get Started</div>
               <Link href="/claim-territory">Claim Territory</Link>
-              <Link href="/#three-test">3 Appointment Test</Link>
-              <Link href="/#industries">Industries</Link>
+              <Link href="/#how-it-works">How It Works</Link>
+              <Link href="/#pricing">Pricing</Link>
             </div>
             <div className="footer__col">
               <div className="footer__h">Company</div>
