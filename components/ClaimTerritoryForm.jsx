@@ -61,7 +61,7 @@ export default function ClaimTerritoryForm() {
     if (!form.industry) errs.industry = "Required";
     if (!form.city.trim()) errs.city = "Required";
     if (!form.zips.trim()) errs.zips = "Required";
-    if (!form.consent) errs.consent = "Please agree to be contacted";
+    if (!form.consent) errs.consent = "You must agree to be contacted";
     return errs;
   };
 
@@ -108,7 +108,7 @@ export default function ClaimTerritoryForm() {
       <div className="form-grid-2">
         <div>
           <label className="form-label" htmlFor="phone">Phone</label>
-          <input id="phone" type="tel" className="form-input" value={form.phone} onChange={set("phone")} placeholder="(555) 123-4567" autoComplete="tel" />
+          <input id="phone" type="tel" className="form-input" value={form.phone} onChange={set("phone")} placeholder="(555) 123-4567" autoComplete="tel" required />
           {errors.phone && <span className="form-error">{errors.phone}</span>}
         </div>
         <div>
@@ -163,12 +163,9 @@ export default function ClaimTerritoryForm() {
       </div>
 
       <label className="form-consent">
-        <input type="checkbox" checked={form.consent} onChange={set("consent")} />
+        <input type="checkbox" checked={form.consent} onChange={set("consent")} required />
         <span>
-          By submitting this form, you agree that BookdlyAI may contact you by phone, email, or text about your territory request. Message and data rates may apply. Message frequency may vary. Reply STOP to opt out or HELP for help. Consent is not a condition of purchase.
-          <br />
-          <Link href="/privacy-policy">Privacy Policy</Link>{" · "}
-          <Link href="/terms-and-conditions">Terms and Conditions</Link>
+          By checking this box, I consent to receive marketing and promotional messages including special offers, discounts, new product updates among others from BookdlyAI at the phone number provided. Frequency may vary. Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.
         </span>
       </label>
       {errors.consent && <span className="form-error" style={{ marginTop: -8 }}>{errors.consent}</span>}
@@ -176,6 +173,13 @@ export default function ClaimTerritoryForm() {
       <button type="submit" className="btn btn--primary btn--lg" style={{ marginTop: 6 }}>
         Submit Territory Request <ArrowIcon size={15} />
       </button>
+
+      <p className="form-fineprint">
+        By submitting, you agree to our{" "}
+        <Link href="/terms-and-conditions">Terms and Conditions</Link>{" "}
+        and{" "}
+        <Link href="/privacy-policy">Privacy Policy</Link>.
+      </p>
     </form>
   );
 }

@@ -96,6 +96,7 @@ export function Footer() {
             <div className="footer__col">
               <div className="footer__h">Get Started</div>
               <Link href="/claim-territory">Claim Territory</Link>
+              <Link href="/needhomeservice">Need Home Service</Link>
               <Link href="/#how-it-works">How It Works</Link>
               <Link href="/#pricing">Pricing</Link>
             </div>
