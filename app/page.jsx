@@ -1,5 +1,10 @@
-import App from "../components/App";
+import SiteFrame from "../components/SiteFrame";
+import Home from "../components/Home";
 
 export default function Page() {
-  return <App />;
+  return (
+    <SiteFrame>
+      <Home />
+    </SiteFrame>
+  );
 }
