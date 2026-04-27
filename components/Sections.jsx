@@ -92,25 +92,22 @@ export function TryIt() {
                 Try the chatbot <span className="gradient-text">yourself</span>.
               </h2>
               <p className="lead">
-                Here is how BookdlyAI would work on a real business website. This is a working demo set up as <b style={{ color: "var(--ink-0)" }}>Elite Roofing</b>. Ask anything, or tap one of the suggested questions.
+                Here is how BookdlyAI would work on a real business website. This is a working demo set up as <b style={{ color: "var(--ink-0)" }}>APsurance</b>, a health-plan agency. Ask anything, or tap one of the suggested questions.
               </p>
               <div className="demo__chips">
-                <DemoChip text="Roof leak" />
-                <DemoChip text="Roof replacement" />
-                <DemoChip text="Storm damage" />
-                <DemoChip text="Free inspection" />
-                <DemoChip text="Ask a question" />
+                <DemoChip text="Check if I qualify" />
+                <DemoChip text="Talk to Alex" />
               </div>
               <p className="demo__hint">
-                Roofing example shown. We customize the chatbot for your business, services, and booking flow.
+                Health-plan example shown. We customize the chatbot for your business, services, and booking flow.
               </p>
             </div>
             <LiveChat
-              business="Elite Roofing AI Front Desk"
-              industry="roofing"
+              business="APsurance Health Plan Assistant"
+              subtitle="Health plan assistant · usually replies instantly"
               scripted={true}
-              intro="Hi, I'm Ava from BookdlyAI. Need help with your roof?"
-              quicks={["Roof leak", "Roof replacement", "Storm damage", "Free inspection", "Ask a question"]}
+              intro="Hi, I'm the APsurance digital assistant. I can help check if you may qualify for a low cost or free health plan. Want to get started?"
+              quicks={["Check if I qualify", "Talk to Alex"]}
             />
           </div>
         </div>
