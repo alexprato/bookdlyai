@@ -102,6 +102,7 @@ export function Footer() {
             </div>
             <div className="footer__col">
               <div className="footer__h">Contact</div>
+              <a href="mailto:bookdlyai@gmail.com">bookdlyai@gmail.com</a>
               <a href="tel:+19544839010">(954) 483-9010</a>
               <a href="https://instagram.com/bookdlyai" target="_blank" rel="noreferrer">@bookdlyai</a>
             </div>

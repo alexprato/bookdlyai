@@ -93,8 +93,9 @@ export default function TermsPage() {
 
           <h2>Contact</h2>
           <p>
-            Questions about these Terms can be directed to BookdlyAI at{" "}
-            <a href="tel:+19544839010">(954) 483-9010</a>.
+            Questions about these Terms can be sent to{" "}
+            <a href="mailto:bookdlyai@gmail.com">bookdlyai@gmail.com</a>{" "}
+            or <a href="tel:+19544839010">(954) 483-9010</a>.
           </p>
         </div>
       </section>
