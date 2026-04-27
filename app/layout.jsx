@@ -1,9 +1,9 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "BookdlyAI: AI front desk for local businesses",
+  title: "BookdlyAI — Turn more leads into qualified appointment opportunities",
   description:
-    "Add an AI front desk to your website so visitors can ask questions and request appointments.",
+    "BookdlyAI captures website visitors, missed calls, and ad inquiries, qualifies them with the right questions, and sends your team clean appointment opportunities they can act on.",
   icons: {
     icon: "/favicon.svg",
   },

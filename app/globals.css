@@ -1028,15 +1028,3 @@ p { margin: 0; }
 /* reveal */
 .reveal { opacity: 0; transform: translateY(12px); transition: opacity .7s ease, transform .7s ease; }
 .reveal.is-in { opacity: 1; transform: none; }
-
-/* APsurance chat: scope a calmer blue/teal accent to the embedded chat widget,
-   so the chatbot can carry its own brand color while the rest of the page
-   stays on the BookdlyAI cyan accent. */
-.chat-stage {
-  --accent: oklch(0.78 0.16 218);
-  --accent-bright: oklch(0.86 0.18 215);
-  --accent-deep: oklch(0.55 0.22 235);
-  --accent-ink: #021428;
-  --accent-glow: color-mix(in oklab, oklch(0.78 0.16 218) 70%, transparent);
-  --accent-soft: color-mix(in oklab, oklch(0.78 0.16 218) 14%, transparent);
-}

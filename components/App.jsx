@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Nav, About, TryIt, Pricing, Contact, Footer } from "./Sections";
+import { Nav, About, Problem, HowItWorks, Industries, TryIt, Pricing, Contact, Footer } from "./Sections";
 
 const ACCENT = {
   color: "oklch(0.86 0.16 195)",
@@ -26,6 +26,9 @@ export default function App() {
       <Nav />
       <main>
         <About />
+        <Problem />
+        <HowItWorks />
+        <Industries />
         <TryIt />
         <Pricing />
         <Contact />

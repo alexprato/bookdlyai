@@ -4,22 +4,27 @@ import React from "react";
 import { Mascot } from "./Mascot";
 
 export default function LiveChat({
-  business = "APsurance",
-  subtitle = "Usually replies instantly",
+  business = "Elite Roofing",
+  industry = "roofing",
   intro,
   quicks,
   scripted = false,
 }) {
-  const defaultIntro = intro ||
-    "Hi, I'm the APsurance digital assistant. I can help check if you may qualify for a low cost or free health plan. Want to get started?";
-  const defaultQuicks = quicks || ["Check if I qualify", "Talk to Alex"];
+  const defaultIntro = intro || "Hi, I'm Ava from BookdlyAI. Need help with your roof?";
+  const defaultQuicks = quicks || [
+    "Roof leak",
+    "Roof replacement",
+    "Storm damage",
+    "Free inspection",
+    "Ask a question",
+  ];
 
   const [messages, setMessages] = React.useState([
     { role: "assistant", content: defaultIntro, quicks: scripted ? defaultQuicks : null },
   ]);
   const [step, setStep] = React.useState(scripted ? "menu" : "free");
-  const [mode, setMode] = React.useState(null);
-  const [lead, setLead] = React.useState({});
+  const [intent, setIntent] = React.useState(null);
+  const [data, setData] = React.useState({});
   const [input, setInput] = React.useState("");
   const [sending, setSending] = React.useState(false);
   const bodyRef = React.useRef(null);
@@ -32,29 +37,16 @@ export default function LiveChat({
 
   const append = (msgs) => setMessages((prev) => [...prev, ...msgs]);
 
-  // Fire-and-forget POST to /api/lead. Server forwards to LEAD_WEBHOOK_URL if
-  // configured, else logs to console. Failure is silent — never block the user.
-  const sendLead = (finalLead, finalMode) => {
-    const payload = {
-      source: "apsurance-chatbot",
-      mode: finalMode,
-      ...finalLead,
-      capturedAt: new Date().toISOString(),
-    };
-    fetch("/api/lead", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    }).catch(() => {});
-  };
+  const intentLabel = (key) => ({
+    leak: "roof leak",
+    replacement: "roof replacement",
+    storm: "storm damage",
+    inspection: "roofing inspection",
+  }[key] || "roofing");
 
-  // ── APsurance scripted flow ─────────────────────────────────────────
-  // Two paths from menu:
-  //   qualify: zip → household → income → name → phone → besttime → done
-  //   talk:    name → phone → besttime → done
-  //
-  // Final lead is POSTed to /api/lead. Server forwards to LEAD_WEBHOOK_URL or
-  // logs server-side during dev — works with no setup.
+  const menuQuicks = ["Roof leak", "Roof replacement", "Storm damage", "Free inspection", "Ask a question"];
+  const offerMenuQuicks = ["Roof leak", "Roof replacement", "Storm damage", "Free inspection"];
+
   const handleScripted = async (text) => {
     const t = text.trim();
     append([{ role: "user", content: t }]);
@@ -64,95 +56,180 @@ export default function LiveChat({
 
     const lc = t.toLowerCase();
 
-    if (step === "menu") {
-      if (/talk to alex|^alex$|call me back|just talk/i.test(lc)) {
-        setMode("talk");
-        setStep("name");
-        reply("Sure, Alex would love to talk. What's your full name?");
+    if (step === "menu" || step === "free") {
+      if (/price|pricing|cost|fee|how much|estimate|quote/.test(lc)) {
+        reply(
+          "Roofing prices depend on the issue, roof type, and size. I can help send your request to the office so they can review it.",
+          { quicks: offerMenuQuicks }
+        );
         return;
       }
-      if (/check|qualify|^yes$|sure|get started|^start$|begin|let's/i.test(lc)) {
-        setMode("qualify");
-        setStep("zip");
-        reply("Great. What's your zip code?");
+      if (/service|what do you|what can you|do you offer/.test(lc)) {
+        reply(
+          "Elite Roofing can help with roof leaks, repairs, replacements, storm damage, and inspections.",
+          { quicks: offerMenuQuicks }
+        );
         return;
       }
+      if (/hour|open|close|business hours/.test(lc)) {
+        reply(
+          "The office can customize hours in the live version. For this demo, I can help collect your request and send it over.",
+          { quicks: offerMenuQuicks }
+        );
+        return;
+      }
+
+      if (/leak|leaking|drip|water (?:in|coming)|wet ceiling/.test(lc)) {
+        setIntent("leak");
+        setStep("leak-active");
+        reply("Got it. Is there active leaking right now?", {
+          quicks: ["Yes, active leak", "No, not active", "Not sure"],
+        });
+        return;
+      }
+      if (/replac|new roof/.test(lc)) {
+        setIntent("replacement");
+        setStep("city");
+        reply("Got it. What city is the property in?");
+        return;
+      }
+      if (/storm|wind|hail|tree fell|tree on/.test(lc)) {
+        setIntent("storm");
+        setStep("city");
+        reply("Got it. What city is the property in?");
+        return;
+      }
+      if (/inspect/.test(lc)) {
+        setIntent("inspection");
+        setStep("city");
+        reply("Got it. What city is the property in?");
+        return;
+      }
+
+      if (/^ask a question$/i.test(lc) || /question|something else|i wanted to/.test(lc)) {
+        setStep("free");
+        reply("Sure, ask away. I can also help with a leak check, replacement, storm damage, or inspection.", {
+          quicks: offerMenuQuicks,
+        });
+        return;
+      }
+
       reply(
-        "I can help check if you may qualify for a low cost or free health plan. Want to get started?",
-        { quicks: ["Check if I qualify", "Talk to Alex"] }
+        "I can help with roofing requests here. Are you dealing with a leak, storm damage, replacement, or inspection?",
+        { quicks: offerMenuQuicks }
       );
       return;
     }
 
-    if (step === "zip") {
-      setLead((L) => ({ ...L, zip: t }));
-      setStep("household");
-      reply("How many people are in your household?");
+    if (step === "leak-active") {
+      let active;
+      if (/not sure|maybe|unsure|don't know|dont know/.test(lc)) active = "Not sure";
+      else if (/yes|active|currently|right now/.test(lc)) active = "Yes, active leak";
+      else if (/^no\b|not active|stopped/.test(lc)) active = "No, not active";
+      else active = t;
+      setData((d) => ({ ...d, leakActive: active }));
+      setStep("city");
+      reply("Got it. What city is the property in?");
       return;
     }
 
-    if (step === "household") {
-      setLead((L) => ({ ...L, householdSize: t }));
-      setStep("income");
-      reply("What's your estimated yearly household income?");
+    if (step === "city") {
+      setData((d) => ({ ...d, city: t }));
+      setStep("homeowner");
+      reply("Are you the homeowner?", {
+        quicks: ["Yes", "No", "Property manager"],
+      });
       return;
     }
 
-    if (step === "income") {
-      setLead((L) => ({ ...L, yearlyIncome: t }));
+    if (step === "homeowner") {
+      let role;
+      if (/property|manager/.test(lc)) role = "Property manager";
+      else if (/^yes\b/.test(lc)) role = "Yes";
+      else if (/^no\b/.test(lc)) role = "No";
+      else role = t;
+      setData((d) => ({ ...d, role }));
+      setStep("datetime");
+      reply("When would you like someone to take a look?");
+      return;
+    }
+
+    if (step === "datetime") {
+      setData((d) => ({ ...d, datetime: t }));
       setStep("name");
-      reply("What's your full name?");
+      reply("Thanks. What's your full name?");
       return;
     }
 
     if (step === "name") {
-      setLead((L) => ({ ...L, fullName: t }));
+      setData((d) => ({ ...d, name: t }));
+      setStep("email");
+      reply("What email should the office use to confirm the details?");
+      return;
+    }
+
+    if (step === "email") {
+      const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(t);
+      if (!ok) {
+        reply("That doesn't look like a valid email. Could you double-check it?");
+        return;
+      }
+      setData((d) => ({ ...d, email: t }));
       setStep("phone");
-      reply("What phone number should Alex use to call you?");
+      reply("What phone number should the office use if they need to call you?");
       return;
     }
 
     if (step === "phone") {
-      setLead((L) => ({ ...L, phone: t }));
-      setStep("besttime");
-      reply("What's the best time for Alex to call you?");
-      return;
-    }
-
-    if (step === "besttime") {
-      const finalLead = { ...lead, bestTime: t };
-      setLead(finalLead);
+      const phone = /^(skip|no thanks|none|nope)$/i.test(lc) ? "" : t;
+      const finalData = { ...data, phone };
+      setData(finalData);
       setStep("done");
-      const first = (finalLead.fullName || "").split(" ")[0] || "there";
-      reply(`Perfect, ${first}. I'll send this to Alex at APsurance so he can check your options and follow up.`);
-      sendLead(finalLead, mode);
+      const first = (finalData.name || "").split(" ")[0] || "there";
+      const label = intentLabel(intent);
+      reply(
+        `Perfect, ${first}. I've sent your ${label} request to Elite Roofing. The office will confirm the details shortly.`,
+        { quicks: ["Send another request", "Back to menu"] }
+      );
       return;
     }
 
     if (step === "done") {
-      if (/start over|new|another|reset|begin again/i.test(lc)) {
-        setMode(null);
-        setLead({});
+      if (/another|new request|send another/i.test(lc)) {
+        setIntent(null);
+        setData({});
         setStep("menu");
-        reply("No problem. Want to check if you may qualify, or talk to Alex?", {
-          quicks: ["Check if I qualify", "Talk to Alex"],
-        });
+        reply("No problem. What can I help with?", { quicks: menuQuicks });
         return;
       }
-      reply("Anything else? You can also start a new check.", {
-        quicks: ["Check if I qualify", "Talk to Alex"],
-      });
+      if (/back|menu/i.test(lc)) {
+        setIntent(null);
+        setStep("menu");
+        reply("Sure. What can I help with?", { quicks: menuQuicks });
+        return;
+      }
+      reply("Anything else I can help with?", { quicks: ["Send another request", "Back to menu"] });
       return;
     }
   };
 
-  // ── Free-form fallback ──────────────────────────────────────────────
-  // Calls /api/chat. Without ANTHROPIC_API_KEY the server returns a friendly
-  // canned reply. Used only when mounted in non-scripted mode.
-  const freeformReply = async (text) => {
+  const freeformReply = async (text, returnStep = "free") => {
     setSending(true);
     try {
-      const sys = `You are a brief, friendly assistant for ${business}. Keep replies to 1-2 short sentences. No emoji, no markdown, no long dashes. Do not mention SMS or texting. Do not say a person qualifies, is approved, or is guaranteed a free plan. Use "may qualify".`;
+      const sys = scripted
+        ? `You are the AI front desk for Elite Roofing, a local roofing company. Be brief, warm, and professional.
+
+Reply rules:
+- Keep replies to 1-2 short sentences, max 30 words.
+- Never use emoji. Never use markdown. Never use long dashes.
+- Never use the underline character.
+- Do not mention SMS, texting, or "we'll text you" or "confirmation text".
+- Do not say a job is fully booked or confirmed.
+- If the question is about scheduling work, end your reply by asking the user if they would like to send a roofing request now.
+- Do not invent specific prices. Say the office will give an estimate after reviewing the property.
+- Stay focused on roofing services for Elite Roofing.`
+        : `You are the AI front desk for ${business}, a local ${industry} business. Be brief, warm, and professional. Keep replies to 1-2 short sentences. No emoji, no markdown, no long dashes. Do not mention SMS or texting. Don't invent prices.`;
+
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -164,16 +241,16 @@ export default function LiveChat({
       append([
         {
           role: "assistant",
-          content: clean || "I can help you check if you may qualify. Want to start?",
-          quicks: ["Check if I qualify", "Talk to Alex"],
+          content: clean || "I can help send your roofing request to the office. Want to start?",
+          quicks: returnStep === "menu" ? offerMenuQuicks : null,
         },
       ]);
     } catch (e) {
       append([
         {
           role: "assistant",
-          content: "I had trouble connecting. Want to check if you may qualify?",
-          quicks: ["Check if I qualify", "Talk to Alex"],
+          content: "I had trouble connecting. Want to send a roofing request?",
+          quicks: offerMenuQuicks,
         },
       ]);
     } finally {
@@ -218,7 +295,7 @@ export default function LiveChat({
           </div>
           <div>
             <div className="chat__title">{business}</div>
-            <div className="chat__sub">{subtitle}</div>
+            <div className="chat__sub">Front desk · usually replies instantly</div>
           </div>
           <button className="chat__menu" aria-label="More" type="button">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -266,7 +343,7 @@ export default function LiveChat({
         maxWidth: 380,
         marginInline: "auto",
       }}>
-        This demo shows how the chatbot can work on your website. The live version can connect to your CRM, calendar, or office inbox.
+        This demo shows how the AI front desk works on your website. The live version is customized to your business and connects to your calendar, forms, or office inbox.
       </p>
     </div>
   );

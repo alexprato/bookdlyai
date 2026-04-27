@@ -13,13 +13,13 @@ export function Nav() {
           <BrandMark size={24} />
         </a>
         <nav className="nav__links">
-          <a href="#about">About</a>
+          <a href="#how">How it works</a>
           <a href="#try">Try it</a>
           <a href="#pricing">Pricing</a>
           <a href="#contact">Contact</a>
         </nav>
         <div className="nav__cta">
-          <a href="#contact" className="btn btn--primary btn--sm">Book a call <Icon.Arrow size={13} /></a>
+          <a href="#contact" className="btn btn--primary btn--sm">Free 7-Day Test <Icon.Arrow size={13} /></a>
         </div>
       </div>
     </header>
@@ -28,28 +28,28 @@ export function Nav() {
 
 export function About() {
   const promises = [
-    { icon: Icon.Sparkle, text: "Added to your existing website. No rebuild needed." },
-    { icon: Icon.Phone, text: "Keep your current business number for phone backup." },
-    { icon: Icon.Shield, text: "AI only steps in when your team can't pick up." },
-    { icon: Icon.Building, text: "For dentists, med spas, roofers, plumbers, HVAC, law firms, and other local service businesses." },
+    { icon: Icon.Sparkle, text: "Captures every lead — website, phone, ad form, missed call." },
+    { icon: Icon.Phone, text: "Answers missed and after-hours calls so nothing slips by." },
+    { icon: Icon.Shield, text: "Asks the right qualifying questions before passing the lead on." },
+    { icon: Icon.Building, text: "Built for roofers, plumbers, HVAC, med spas, dentists, law firms, and other local service businesses." },
   ];
   return (
     <section className="hero" id="about">
       <div className="container">
         <div style={{ maxWidth: 880, margin: "0 auto", textAlign: "center" }}>
-          <span className="tag"><span className="dot" /> Friendly AI front desk for local businesses</span>
+          <span className="tag"><span className="dot" /> Lead-to-appointment system for local businesses</span>
           <div className="hero__mascot" aria-hidden="true">
             <Mascot size={140} />
           </div>
           <h1 style={{ marginTop: 18 }}>
-            Add an <span className="gradient-text">AI front desk</span> to your website.
+            Stop losing leads before they become <span className="gradient-text">appointments</span>.
           </h1>
           <p className="hero__sub" style={{ margin: "22px auto 0", textAlign: "center" }}>
-            BookdlyAI helps local businesses answer website questions, collect appointment requests, and catch missed calls without rebuilding their website.
+            BookdlyAI captures website visitors, missed calls, and ad inquiries, qualifies them with the right questions, and sends your team clean appointment opportunities they can act on.
           </p>
           <div className="hero__ctas row" style={{ justifyContent: "center", marginTop: 28 }}>
-            <a href="#try" className="btn btn--primary btn--lg"><Icon.Sparkle /> Try the chatbot live</a>
-            <a href="#pricing" className="btn btn--ghost btn--lg">See pricing</a>
+            <a href="#contact" className="btn btn--primary btn--lg"><Icon.Sparkle /> Get a Free 7 Day Test</a>
+            <a href="#how" className="btn btn--ghost btn--lg">See How It Works</a>
           </div>
           <ul className="promise-row">
             {promises.map((p) => (
@@ -59,6 +59,191 @@ export function About() {
               </li>
             ))}
           </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function Problem() {
+  const pains = [
+    "Missed calls",
+    "Slow response time",
+    "After-hours inquiries with no one to answer",
+    "Contact forms that go cold",
+    "Leads with no context for your team",
+    "No tracking of what happened to each lead",
+    "Wasted ad spend on inquiries that never get worked",
+    "Staff too busy to follow up instantly",
+  ];
+
+  return (
+    <section className="section" id="problem">
+      <div className="container container--narrow">
+        <div style={{ textAlign: "center", maxWidth: 720, margin: "0 auto 40px" }}>
+          <span className="eyebrow eyebrow--center">The problem</span>
+          <h2 style={{ marginTop: 14 }}>You are already getting leads. The problem is what happens next.</h2>
+          <p className="lead" style={{ marginTop: 16, marginInline: "auto" }}>
+            Local businesses get website visitors, calls, form submissions, and ad inquiries every week. Most of that traffic never turns into an appointment, and the leaks usually look the same.
+          </p>
+        </div>
+
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(2, 1fr)",
+          gap: 12,
+        }}>
+          {pains.map((p) => (
+            <div key={p} style={{
+              display: "flex", alignItems: "center", gap: 14,
+              padding: "16px 20px",
+              border: "1px solid var(--line-strong)",
+              borderRadius: 12,
+              background: "rgba(255,255,255,0.02)",
+            }}>
+              <span style={{
+                width: 28, height: 28, borderRadius: 8,
+                background: "rgba(255,140,140,0.10)",
+                color: "#ff9b9b",
+                display: "grid", placeItems: "center",
+                flexShrink: 0,
+              }}>
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                  <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+              </span>
+              <span style={{ fontSize: 14.5 }}>{p}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function HowItWorks() {
+  const steps = [
+    {
+      title: "Capture the inquiry",
+      body: "Website visitor, form lead, ad lead, or missed call enters the system.",
+    },
+    {
+      title: "Qualify the person",
+      body: "BookdlyAI asks the right questions based on your business and services.",
+    },
+    {
+      title: "Collect the important details",
+      body: "Name, phone, service needed, location, urgency, and preferred time.",
+    },
+    {
+      title: "Send the full summary",
+      body: "Your team gets a clean appointment opportunity, not a random lead.",
+    },
+    {
+      title: "Track the result",
+      body: "Appointment requested, confirmed, showed, won, lost, or bad lead.",
+    },
+  ];
+
+  return (
+    <section className="section" id="how">
+      <div className="container container--narrow">
+        <div style={{ textAlign: "center", maxWidth: 720, margin: "0 auto 48px" }}>
+          <span className="eyebrow eyebrow--center">How it works</span>
+          <h2 style={{ marginTop: 14 }}>How BookdlyAI turns inquiries into <span className="gradient-text">appointment opportunities</span>.</h2>
+          <p className="lead" style={{ marginTop: 16, marginInline: "auto" }}>
+            Five steps. Same flow for every lead, no matter where it comes from.
+          </p>
+        </div>
+
+        <div style={{ display: "grid", gap: 14, maxWidth: 760, margin: "0 auto" }}>
+          {steps.map((s, i) => (
+            <div key={s.title} style={{
+              display: "grid",
+              gridTemplateColumns: "auto 1fr",
+              gap: 20,
+              padding: "22px 24px",
+              background: "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01))",
+              border: "1px solid var(--line-strong)",
+              borderRadius: 16,
+              alignItems: "start",
+            }}>
+              <div style={{
+                width: 44, height: 44, borderRadius: 12,
+                background: "var(--accent-soft)",
+                color: "var(--accent)",
+                display: "grid", placeItems: "center",
+                fontWeight: 700, fontSize: 13,
+                fontFamily: "var(--font-mono)",
+                letterSpacing: "0.04em",
+                border: "1px solid var(--accent-soft)",
+              }}>
+                {String(i + 1).padStart(2, "0")}
+              </div>
+              <div>
+                <h3 style={{ fontSize: 18, marginBottom: 6, color: "var(--ink-0)" }}>{s.title}</h3>
+                <p style={{ fontSize: 14.5, color: "var(--ink-3)", margin: 0, lineHeight: 1.55 }}>{s.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{
+          maxWidth: 760, margin: "32px auto 0",
+          padding: "18px 22px",
+          border: "1px dashed var(--line-strong)",
+          borderRadius: 14,
+          fontSize: 13.5,
+          color: "var(--ink-3)",
+          lineHeight: 1.6,
+        }}>
+          <b style={{ color: "var(--ink-1)" }}>Works without SMS approval.</b> The core system runs on website chat, online forms, calendar request flows, inbound AI phone answering, call summaries, email notifications, and CRM/GHL tracking. <span style={{ color: "var(--ink-2)" }}>SMS follow-up and appointment reminders can be added after each business completes texting approval.</span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function Industries() {
+  const industries = [
+    "Roofers",
+    "Plumbers",
+    "HVAC companies",
+    "Electricians",
+    "Restoration companies",
+    "Med spas",
+    "Dentists",
+    "Law firms",
+    "Real estate agents",
+    "Insurance agencies",
+    "Home service businesses",
+  ];
+
+  return (
+    <section className="section tight" id="industries">
+      <div className="container container--narrow">
+        <div style={{ textAlign: "center", maxWidth: 740, margin: "0 auto" }}>
+          <span className="eyebrow eyebrow--center">Who it's for</span>
+          <h2 style={{ marginTop: 14 }}>Built for businesses that book appointments, quotes, inspections, or consultations.</h2>
+          <p className="lead" style={{ marginTop: 16, marginInline: "auto" }}>
+            Any local service business where a missed call, slow reply, or unqualified lead costs real money.
+          </p>
+        </div>
+
+        <div style={{
+          display: "flex", flexWrap: "wrap", gap: 10,
+          justifyContent: "center", maxWidth: 800, margin: "32px auto 0",
+        }}>
+          {industries.map((ind) => (
+            <span key={ind} style={{
+              padding: "10px 18px",
+              border: "1px solid var(--line-strong)",
+              borderRadius: 999,
+              fontSize: 14, fontWeight: 500,
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--ink-1)",
+            }}>{ind}</span>
+          ))}
         </div>
       </div>
     </section>
@@ -89,25 +274,28 @@ export function TryIt() {
             <div className="demo__copy">
               <span className="tag"><Icon.Sparkle /> Live demo</span>
               <h2 style={{ marginTop: 18 }}>
-                Try the chatbot <span className="gradient-text">yourself</span>.
+                Try the <span className="gradient-text">AI front desk</span>.
               </h2>
               <p className="lead">
-                Here is how BookdlyAI would work on a real business website. This is a working demo set up as <b style={{ color: "var(--ink-0)" }}>APsurance</b>, a health-plan agency. Ask anything, or tap one of the suggested questions.
+                This is one part of the system. The live version is customized to your business, questions, calendar, and lead process. Ask anything, or tap one of the suggested questions.
               </p>
               <div className="demo__chips">
-                <DemoChip text="Check if I qualify" />
-                <DemoChip text="Talk to Alex" />
+                <DemoChip text="Roof leak" />
+                <DemoChip text="Roof replacement" />
+                <DemoChip text="Storm damage" />
+                <DemoChip text="Free inspection" />
+                <DemoChip text="Ask a question" />
               </div>
               <p className="demo__hint">
-                Health-plan example shown. We customize the chatbot for your business, services, and booking flow.
+                Demo set up as <b style={{ color: "var(--ink-0)" }}>Elite Roofing</b>. We customize the AI front desk for your business, services, and booking flow.
               </p>
             </div>
             <LiveChat
-              business="APsurance Health Plan Assistant"
-              subtitle="Health plan assistant · usually replies instantly"
+              business="Elite Roofing AI Front Desk"
+              industry="roofing"
               scripted={true}
-              intro="Hi, I'm the APsurance digital assistant. I can help check if you may qualify for a low cost or free health plan. Want to get started?"
-              quicks={["Check if I qualify", "Talk to Alex"]}
+              intro="Hi, I'm Ava from BookdlyAI. Need help with your roof?"
+              quicks={["Roof leak", "Roof replacement", "Storm damage", "Free inspection", "Ask a question"]}
             />
           </div>
         </div>
@@ -119,37 +307,41 @@ export function TryIt() {
 export function Pricing() {
   const tiers = [
     {
-      name: "AI Website Front Desk",
-      price: "$500",
+      name: "Lead Capture System",
+      price: "$297",
       per: "/month",
-      best: "Best for businesses that want their website to capture more calls, quote requests, and appointments.",
+      best: "For businesses that want to stop losing website inquiries.",
+      promise: <><b>Promise:</b> Capture and qualify up to 5 appointment opportunities per month.</>,
       includes: [
-        "AI chatbot added to existing website",
-        "Answers common questions",
-        "Collects lead details",
+        "Website AI front desk",
+        "Lead qualification questions",
         "Appointment or quote request flow",
-        "Sends request to your office",
+        "Sends full lead summary to your office",
         "Basic monthly report",
         "No website rebuild needed",
+        "Works without SMS approval",
       ],
       cta: "Try It Free for 7 Days",
       featured: false,
       ctaPrimary: false,
     },
     {
-      name: "Full AI Front Desk",
-      price: "$1,000",
+      name: "Missed Lead Protection",
+      price: "$697",
       per: "/month",
-      best: "Best for businesses that want website chat plus missed-call and after-hours backup.",
+      best: "For businesses that miss calls, get after-hours inquiries, or need faster lead response.",
+      promise: <><b>Promise:</b> Capture and qualify up to 15 appointment opportunities per month.</>,
       includes: [
-        "Everything in Tier 1",
+        "Everything in Lead Capture System",
         "Missed-call AI backup",
         "After-hours AI answering",
         "Business keeps current phone number",
         "Staff answers first",
         "If no one answers, AI collects caller details",
         "Call summaries sent to your office",
-        "Includes up to 100 AI-handled call minutes/month",
+        "Includes up to 100 AI-handled call minutes per month",
+        "CRM/GHL appointment tracking",
+        "SMS follow-up can be added after A2P approval",
       ],
       cta: "Book a Call",
       badge: "Most Popular",
@@ -157,43 +349,44 @@ export function Pricing() {
       ctaPrimary: true,
     },
     {
-      name: "Growth Appointment Engine",
+      name: "Appointment Growth System",
       priceLead: "Starting at",
       price: "$1,500",
       per: "/month + ad spend",
-      best: "For businesses that want new appointment opportunities generated for them, not just better website conversion.",
-      promise: <><b>Launch offer:</b> Get 10 qualified appointment opportunities or we keep working until you do.</>,
+      best: "For businesses that want us to help generate new appointment opportunities, not just capture the ones they already have.",
+      promise: <><b>Promise:</b> Generate and qualify up to 30 appointment opportunities per month.</>,
       includes: [
-        "Everything in Tier 2",
+        "Everything in Missed Lead Protection",
         "Landing page",
         "Lead generation campaign setup",
-        "Lead tracking",
-        "Qualification flow",
-        "Appointment request delivery",
+        "Ad lead form integration",
+        "AI qualification flow",
+        "Lead source tracking",
+        "Appointment opportunity delivery",
         "Monthly performance review",
+        "Bad lead replacement rules",
       ],
       cta: "Apply for Growth Plan",
-      badge: "Done For You Growth",
+      badge: "Application Only",
       featured: false,
       ctaPrimary: false,
-      disclaimer: "Qualified opportunities only. We do not guarantee closed deals, revenue, or close rate.",
     },
   ];
 
   return (
     <section className="section" id="pricing">
       <div className="container container--narrow">
-        <div style={{ textAlign: "center", maxWidth: 640, margin: "0 auto" }}>
+        <div style={{ textAlign: "center", maxWidth: 720, margin: "0 auto" }}>
           <span className="eyebrow eyebrow--center">Pricing</span>
-          <h2 style={{ marginTop: 14 }}>Simple, flat monthly pricing.</h2>
-          <p className="founder-note">Founder pricing for our first local business partners.</p>
+          <h2 style={{ marginTop: 14 }}>Simple founder pricing for our first local business partners.</h2>
+          <p className="founder-note">Outcome-based plans. Cancel anytime in the first 7 days, no hard feelings.</p>
         </div>
 
         <div className="trial-banner">
           <div className="trial-banner__pulse" aria-hidden="true"><span /></div>
           <div className="trial-banner__copy">
             <div className="trial-banner__title">Free 7 Day Test</div>
-            <p>Try the AI Website Front Desk on a demo page or your real website for 7 days. If it creates real appointment opportunities, keep it. If not, no hard feelings.</p>
+            <p>Try the Lead Capture System on your real website for 7 days. If it creates real appointment opportunities, keep it. If not, walk away.</p>
           </div>
           <a href="#contact" className="btn btn--primary">Start Free 7 Day Test <Icon.Arrow /></a>
         </div>
@@ -210,19 +403,12 @@ export function Pricing() {
               </div>
               <div className="tier__problem">{t.best}</div>
               {t.promise && <div className="tier__promise">{t.promise}</div>}
-              {t.callout && <div className="tier__callout">{t.callout}</div>}
               <div className="tier__includes">Includes</div>
               <ul>
                 {t.includes.map((line) => (
                   <li key={line}><Icon.CheckCircle /><span>{line}</span></li>
                 ))}
               </ul>
-              {t.note && (
-                <p className="tier__note">{t.note}</p>
-              )}
-              {t.disclaimer && (
-                <p className="tier__disclaimer">{t.disclaimer}</p>
-              )}
               <div className="tier__cta">
                 <a href="#contact" className={"btn " + (t.ctaPrimary ? "btn--primary" : "btn--ghost")}>
                   {t.cta} <Icon.Arrow />
@@ -231,6 +417,16 @@ export function Pricing() {
             </div>
           ))}
         </div>
+
+        <p style={{
+          maxWidth: 720, margin: "32px auto 0",
+          textAlign: "center",
+          fontSize: 12.5,
+          color: "var(--ink-4)",
+          lineHeight: 1.6,
+        }}>
+          Appointment opportunities are qualified requests, calls, or form submissions that match the agreed business rules. We do not guarantee closed deals, revenue, or close rate.
+        </p>
       </div>
     </section>
   );
@@ -274,9 +470,9 @@ export function Contact() {
       <div className="container container--narrow">
         <div style={{ textAlign: "center", maxWidth: 640, margin: "0 auto 36px" }}>
           <span className="eyebrow eyebrow--center">Contact</span>
-          <h2 style={{ marginTop: 14 }}>Want this on your website?</h2>
+          <h2 style={{ marginTop: 14 }}>Want this for your business?</h2>
           <p className="lead" style={{ marginTop: 16, marginInline: "auto" }}>
-            Book a quick call and we'll show you how BookdlyAI would work for your business.
+            Book a quick call and we'll show you exactly how BookdlyAI would capture and qualify leads for your specific business.
           </p>
           <div className="row" style={{ justifyContent: "center", marginTop: 24 }}>
             <a href="#" className="btn btn--primary btn--lg">Book a Call <Icon.Arrow /></a>
@@ -337,7 +533,7 @@ export function Contact() {
                 <label style={fieldStyle}>Industry</label>
                 <select style={inputStyle} value={form.industry} onChange={set("industry")} onFocus={onFocus} onBlur={onBlur}>
                   <option value="" style={{ background: "#0f1218" }}>Choose one…</option>
-                  {["Roofing", "Plumbing", "Water Restoration", "HVAC", "Med Spa", "Dental", "Law Firm", "Insurance", "Other local service"].map(o => <option key={o} style={{ background: "#0f1218" }}>{o}</option>)}
+                  {["Roofing", "Plumbing", "Water Restoration", "HVAC", "Electrical", "Med Spa", "Dental", "Law Firm", "Real Estate", "Insurance", "Other local service"].map(o => <option key={o} style={{ background: "#0f1218" }}>{o}</option>)}
                 </select>
                 {errors.industry && <span style={{ color: "#ff7777", fontSize: 12 }}>{errors.industry}</span>}
               </div>
@@ -353,12 +549,12 @@ export function Contact() {
               {errors.email && <span style={{ color: "#ff7777", fontSize: 12 }}>{errors.email}</span>}
             </div>
             <div>
-              <label style={fieldStyle}>Which tier are you interested in?</label>
+              <label style={fieldStyle}>Which plan are you interested in?</label>
               <select style={inputStyle} value={form.tier} onChange={set("tier")} onFocus={onFocus} onBlur={onBlur}>
                 <option value="" style={{ background: "#0f1218" }}>Choose one…</option>
-                <option style={{ background: "#0f1218" }}>AI Website Front Desk - $500/mo</option>
-                <option style={{ background: "#0f1218" }}>Full AI Front Desk - $1,000/mo</option>
-                <option style={{ background: "#0f1218" }}>Growth Appointment Engine - Starting at $1,500/mo + ad spend</option>
+                <option style={{ background: "#0f1218" }}>Lead Capture System - $297/mo</option>
+                <option style={{ background: "#0f1218" }}>Missed Lead Protection - $697/mo</option>
+                <option style={{ background: "#0f1218" }}>Appointment Growth System - Starting at $1,500/mo + ad spend</option>
                 <option style={{ background: "#0f1218" }}>Not sure yet</option>
               </select>
             </div>
@@ -379,12 +575,12 @@ export function Footer() {
         <div className="footer__top">
           <div className="footer__brand">
             <BrandMark size={28} />
-            <p className="footer__tag">AI front desk for websites, missed calls, and appointment requests.</p>
+            <p className="footer__tag">Lead-to-appointment system for local service businesses. Capture, qualify, and route appointment opportunities so fewer leads slip through the cracks.</p>
           </div>
           <div className="footer__cols">
             <div className="footer__col">
               <div className="footer__h">Product</div>
-              <a href="#about">About</a>
+              <a href="#how">How it works</a>
               <a href="#try">Try it</a>
               <a href="#pricing">Pricing</a>
             </div>
@@ -412,7 +608,7 @@ export function Footer() {
         </div>
         <div className="footer__bottom">
           <span>© 2026 BookdlyAI. All rights reserved.</span>
-          <span>Friendly AI booking for local service businesses.</span>
+          <span>Lead-to-appointment system for local service businesses.</span>
         </div>
       </div>
     </footer>
