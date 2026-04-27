@@ -59,6 +59,19 @@ export default function PrivacyPolicyPage() {
             <li>When required by law or to protect our rights, our clients, or the public.</li>
           </ul>
 
+          <h2>Cookie and Tracking Information</h2>
+          <p>
+            BookdlyAI.com may use cookies, pixels, analytics tools, tracking technologies, and similar technologies to understand website traffic, improve website performance, measure marketing effectiveness, remember user preferences, and improve our services. These technologies may collect information such as browser type, device type, pages visited, referral source, approximate location, and interactions with our website.
+          </p>
+          <p>
+            You can control or disable cookies through your browser settings. Disabling cookies may affect how certain parts of the website function.
+          </p>
+
+          <h2>Data Security Practices</h2>
+          <p>
+            BookdlyAI uses reasonable administrative, technical, and organizational safeguards designed to protect the information we collect from unauthorized access, use, disclosure, alteration, or destruction. However, no method of internet transmission or electronic storage is completely secure, and we cannot guarantee absolute security.
+          </p>
+
           <h2>Data Retention</h2>
           <p>
             We retain information for as long as needed to provide our services, comply with legal obligations, resolve disputes, and enforce our agreements. You may request deletion of your information by contacting us at the email below.

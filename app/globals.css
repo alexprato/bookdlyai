@@ -868,8 +868,33 @@ p { margin: 0; }
   width: 18px; height: 18px;
   flex: none; margin-top: 1px;
   accent-color: var(--accent);
+  cursor: pointer;
 }
 .form-consent a { color: var(--accent-bright); }
+.form-consent__required {
+  color: var(--accent-bright);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.form-consent--error {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(255, 119, 119, 0.10);
+}
+.form-consent--error .form-consent__required { color: var(--red); }
+.btn[disabled],
+.btn[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  filter: saturate(0.7);
+}
+.btn[disabled]:hover,
+.btn[aria-disabled="true"]:hover {
+  transform: none;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.4) inset,
+    0 0 0 1px rgba(59, 130, 246, 0.4),
+    0 8px 28px -6px var(--accent-glow);
+}
 .form-fineprint {
   margin: 6px 0 0;
   text-align: center;

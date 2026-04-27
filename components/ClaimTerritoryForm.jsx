@@ -61,7 +61,7 @@ export default function ClaimTerritoryForm() {
     if (!form.industry) errs.industry = "Required";
     if (!form.city.trim()) errs.city = "Required";
     if (!form.zips.trim()) errs.zips = "Required";
-    if (!form.consent) errs.consent = "You must agree to be contacted";
+    if (!form.consent) errs.consent = "Please check the consent box to continue.";
     return errs;
   };
 
@@ -162,15 +162,29 @@ export default function ClaimTerritoryForm() {
         </div>
       </div>
 
-      <label className="form-consent">
-        <input type="checkbox" checked={form.consent} onChange={set("consent")} required />
+      <label className={"form-consent" + (errors.consent ? " form-consent--error" : "")}>
+        <input
+          type="checkbox"
+          checked={form.consent}
+          onChange={set("consent")}
+          required
+          aria-required="true"
+          aria-invalid={errors.consent ? "true" : "false"}
+        />
         <span>
+          <strong className="form-consent__required">Required.</strong>{" "}
           By checking this box, I consent to receive marketing and promotional messages including special offers, discounts, new product updates among others from BookdlyAI at the phone number provided. Frequency may vary. Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.
         </span>
       </label>
       {errors.consent && <span className="form-error" style={{ marginTop: -8 }}>{errors.consent}</span>}
 
-      <button type="submit" className="btn btn--primary btn--lg" style={{ marginTop: 6 }}>
+      <button
+        type="submit"
+        className="btn btn--primary btn--lg"
+        style={{ marginTop: 6 }}
+        disabled={!form.consent}
+        aria-disabled={!form.consent}
+      >
         Submit Territory Request <ArrowIcon size={15} />
       </button>
 

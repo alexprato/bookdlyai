@@ -63,6 +63,16 @@ export default function TermsPage() {
             <li>Consent to receive messages is not a condition of purchase.</li>
           </ul>
 
+          <h2>Carrier Liability Disclaimer</h2>
+          <p>
+            Wireless carriers are not liable for delayed or undelivered messages. Delivery of SMS messages may depend on your mobile carrier, network availability, and other factors outside of BookdlyAI&rsquo;s control.
+          </p>
+
+          <h2>Age Restriction</h2>
+          <p>
+            BookdlyAI services are intended for users who are 18 years of age or older. By using BookdlyAI.com or submitting a form, you confirm that you are at least 18 years old.
+          </p>
+
           <h2>Acceptable Use</h2>
           <ul>
             <li>You will provide accurate information about your business and service area.</li>
