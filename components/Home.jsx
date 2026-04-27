@@ -10,12 +10,6 @@ const ArrowIcon = ({ size = 14 }) => (
   </svg>
 );
 
-const CheckIcon = ({ size = 12 }) => (
-  <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
-    <path d="M3.5 8.5l3 3 6-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-
 const CATEGORIES = [
   {
     name: "Repairs",
@@ -105,12 +99,6 @@ function HowItWorks() {
     "You receive appointment-ready opportunities",
     "If it works, you keep the territory",
   ];
-  const qualified = [
-    "Real contact info",
-    "Correct service area",
-    "Requested the service",
-    "Agreed to a call, estimate, or appointment window",
-  ];
   return (
     <section className="section section--tight" id="how-it-works">
       <div className="container container--narrow">
@@ -120,32 +108,14 @@ function HowItWorks() {
             Try <span className="gradient-text">3 qualified appointments</span> first
           </h2>
         </div>
-
-        <div className="three-test__grid">
-          <ol className="steps steps--compact">
-            {steps.map((s, i) => (
-              <li key={s} className="step-row">
-                <div className="step-row__num">{String(i + 1).padStart(2, "0")}</div>
-                <h3>{s}</h3>
-              </li>
-            ))}
-          </ol>
-
-          <aside className="qualified-card">
-            <div className="qualified-card__h">
-              <span className="qualified-card__pill">Qualified =</span>
-              A qualified appointment includes:
-            </div>
-            <ul>
-              {qualified.map((q) => (
-                <li key={q}>
-                  <span className="ic"><CheckIcon /></span>
-                  <span>{q}</span>
-                </li>
-              ))}
-            </ul>
-          </aside>
-        </div>
+        <ol className="steps-quad">
+          {steps.map((s, i) => (
+            <li key={s} className="step-quad">
+              <div className="step-quad__num">{String(i + 1).padStart(2, "0")}</div>
+              <div className="step-quad__text">{s}</div>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );
@@ -216,24 +186,6 @@ function Pricing() {
   );
 }
 
-function FinalCta() {
-  return (
-    <section className="final-cta" id="contact">
-      <div className="final-cta__inner">
-        <h2>Want to test your territory?</h2>
-        <p className="lead" style={{ margin: "12px auto 0" }}>
-          Tell us your industry and zip codes. If your area is open, we&apos;ll set up your 3 appointment test.
-        </p>
-        <div style={{ display: "flex", justifyContent: "center", marginTop: 22 }}>
-          <Link href="/claim-territory" className="btn btn--primary btn--lg">
-            Claim Your 3 Appointment Test <ArrowIcon size={15} />
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 export default function Home() {
   return (
     <>
@@ -241,7 +193,6 @@ export default function Home() {
       <HowItWorks />
       <Industries />
       <Pricing />
-      <FinalCta />
     </>
   );
 }

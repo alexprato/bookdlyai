@@ -100,8 +100,7 @@ export function Footer() {
               <Link href="/#pricing">Pricing</Link>
             </div>
             <div className="footer__col">
-              <div className="footer__h">Company</div>
-              <Link href="/#contact">Contact</Link>
+              <div className="footer__h">Contact</div>
               <a href="mailto:support@bookdlyai.com">support@bookdlyai.com</a>
             </div>
             <div className="footer__col">
